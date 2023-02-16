@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Semantic Similarity</h1>
+    <p>This app calculates a measure of semantic similarity between a target word and a list of "positive" attribute word versus a set of "negative" attribute words.</p>
+    <p>For an application of the method to Implicit Association Test-like data, see <a href="https://www.tandfonline.com/eprint/HQSV7KQY35BY53BHEW36/full?target=10.1080/16066359.2022.2123474">Gladwin (2022)</a>.</p>
+    <h2>Input</h2>
+    <p>Please enter the words as a comma-separated list.</p>
+    <form action = "semsim_results" method="POST">
+        Target words:  <input type="text" name="target_words">
+        Positive words: <input type="text" name="pos_words">
+        Negative words: <input type="text" name="neg_words">
+        <br>
+        <button>Submit</button>
+    </form>
+{% endblock %}

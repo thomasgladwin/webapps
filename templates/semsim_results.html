@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Semantic Similarity</h1>
+    <h2>Results</h2>
+    <h3>These input words were available in the vocabulary:</h3>
+    <p>Target words:</p>
+    {% for w in target_words %}
+        <div>{{ w }}</div>
+    {% endfor %}
+    <p>Positive words:</p>
+    {% for w in pos_words %}
+        <div>{{ w }}</div>
+    {% endfor %}
+    <p>Negative words:</p>
+    {% for w in neg_words %}
+        <div>{{ w }}</div>
+    {% endfor %}
+
+    <h3>Relative similarities per target word:</h3>
+    {% for val in relative_sims %}
+        <div>{{ val }}</div>
+    {% endfor %}
+
+    <p><a href="{{ url_for('semsim') }}">New inputs</a></p>
+
+{% endblock %}

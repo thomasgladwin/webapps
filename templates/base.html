@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tegladwin apps</title>
+</head>
+<body>
+    <nav>
+        <a href="https://tegladwin.com">https://www.tegladwin.com</a>
+        | <a href="{{ url_for('home') }}">Apps home</a>
+        | <a href="{{ url_for('semsim') }}">SemSim</a>
+        | <a href="{{ url_for('emocont') }}">EmoCont</a>
+    </nav>
+    <hr>
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>

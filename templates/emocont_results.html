@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Emotional Content</h1>
+    <h2>Results</h2>
+    <h3>The text was:</h3>
+    <p>{{ text }}</p>
+
+    <h3>The overall emotional content was, from most to least strongly associated:</h3>
+    {% for val in output_all %}
+        <div>{{ val }}</div>
+    {% endfor %}
+
+    <h3>The primary emotions per paragraph were:</h3>
+
+    {{ output_per_paragraph_str }}
+
+    <p><a href="{{ url_for('emocont') }}">New text</a></p>
+
+{% endblock %}
