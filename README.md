@@ -1,7 +1,6 @@
 # webapps
-Web apps, including semantic similarity functions
 
-Repository for apps running on apps.tegladwin.com.
+Repository for Flask apps running on apps.tegladwin.com (hosted on Dreamhost). The idea was to turn some research software into more accessible web apps.
 
 Currently:
 
