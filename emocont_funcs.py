@@ -79,36 +79,41 @@ def get_emocont_inner(text):
     emo_indices = np.array(emo_indices).flatten()
     emo_sims = np.array(emo_sims).flatten()
     # Order selected emotions by their similarity level
-    indices = np.argsort(emo_sims)
-    indices = emo_indices[indices]
+    indices_flattened = np.argsort(emo_sims)
+    indices = emo_indices[indices_flattened]
     # Get best two emotions
     nEmos_total = np.min([3, nEmos_per_token])
     output_this = []
+    output_sim_this = []
     iEmo = 1
     nEmo = 0
     used_indices = []
     while nEmo < nEmos_total and iEmo <= len(indices):
         this_index = indices[-iEmo]
+        this_index_flattened = indices_flattened[-iEmo]
         if not this_index in used_indices:
             output_this.append(emowords[this_index])
+            output_sim_this.append(emo_sims[this_index_flattened])
             used_indices.append(this_index)
             nEmo = nEmo + 1
         iEmo = iEmo + 1
     print(output_this)
     # To add: valence
     # ...
-    return output_this
+    return output_this, output_sim_this
 
 def get_emocont(text):
-    output = []
-    output_all = get_emocont_inner(text)
+    output_all, output_sim_all = get_emocont_inner(text)
     paragraphs = text.split('\n')
     output_per_paragraph = []
+    output_sim_per_paragraph = []
     for paragraph in paragraphs:
         if len(paragraph) == 0:
             continue
-        output_this = get_emocont_inner(paragraph)
+        output_this, output_sim_this = get_emocont_inner(paragraph)
         if len(output_this) == 0:
             output_this = ['-']
+            output_sim_this = [0]
         output_per_paragraph.append(output_this[0])
-    return output_all, output_per_paragraph
+        output_sim_per_paragraph.append(output_sim_this[0])
+    return output_all, output_sim_all, output_per_paragraph, output_sim_per_paragraph

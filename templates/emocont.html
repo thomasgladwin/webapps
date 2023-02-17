@@ -2,11 +2,13 @@
 
 {% block content %}
     <h1>Emotional Content</h1>
-    <p>This app generates a guess at the emotional content of a text. Note that the output per paragraph could be fed into SemSim for further analysis.</p>
+    <p>This app generates a guess at the emotional content of a text. A few emotions are generated for the whole text, and the single best emotion is given for each paragraph.</p>
+    <p>Note that the output per paragraph could be fed into SemSim for further analysis, e.g., using a valence filter.</p>
     <h2>Input</h2>
     <form action = "emocont_results" method="POST">
         <textarea rows=5 cols=80 name="text"></textarea>
         <br>
         <button>Submit</button>
     </form>
+
 {% endblock %}

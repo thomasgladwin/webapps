@@ -11,9 +11,16 @@
         <div>{{ val }}</div>
     {% endfor %}
 
-    <h3>The primary emotions per paragraph were:</h3>
+    <h3>The respective similarity scores were:</h3>
+    {% for val in output_sim_all %}
+        <div>{{ val }}</div>
+    {% endfor %}
 
-    {{ output_per_paragraph_str }}
+    <h3>The primary emotions per paragraph were:</h3>
+    <div>{{ output_per_paragraph_str }}</div>
+
+    <h3>The similarity scores of the primary emotions per paragraph were:</h3>
+    <div>{{ output_sim_per_paragraph_str }}</div>
 
     <p><a href="{{ url_for('emocont') }}">New text</a></p>
 

@@ -32,6 +32,7 @@ def emocont():
 @app.route('/emocont_results', methods=['GET', 'POST'])
 def emocont_results():
     text = request.form['text']
-    output_all, output_per_paragraph = emocont_funcs.get_emocont(text)
+    output_all, output_sim_all, output_per_paragraph, output_sim_per_paragraph = emocont_funcs.get_emocont(text)
     output_per_paragraph_str = ','.join(output_per_paragraph)
-    return render_template('emocont_results.html', text=text, output_all=output_all, output_per_paragraph_str=output_per_paragraph_str)
+    output_sim_per_paragraph_str = ','.join([str(round(a, 3)) for a in output_sim_per_paragraph])
+    return render_template('emocont_results.html', text=text, output_all=output_all, output_sim_all=output_sim_all, output_per_paragraph_str=output_per_paragraph_str, output_sim_per_paragraph_str=output_sim_per_paragraph_str)
