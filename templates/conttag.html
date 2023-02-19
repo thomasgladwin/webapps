@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Content Tagger</h1>
+    <p>This app attempts to assigns a best-guess tag to the meaning of a text. The single best tag is given for each paragraph, and a few tags are given for the whole text.</p>
+    <p>Note that the output per paragraph could be fed into SemSim for further analysis, e.g., using a valence filter.</p>
+    <h2>Input</h2>
+    <form action = "conttag_results" method="POST">
+        <label>Text to analyze:</label>
+        <br><textarea rows=5 cols=80 name="text"></textarea>
+        <br>
+        <label>Tags (comma-separated list; if left empty, a default set of emotion-tags will be used):</label>
+        <br><input type='text' size = "80" name="tags"></input>
+        <p><button>Submit</button></p>
+    </form>
+
+    <h2>Example</h2>
+    An example to check whether a few single-line paragraphs return the expected tags:
+    <p>Text to analyze:
+    <br>I am angry.
+    <br>I own a fridge.
+    <br>I am happy.
+    <br>We had a party for my birthday.
+    <br>I eat a lot of fish.
+    <br>I went to the funeral.
+    <p>Tags: Can be kept empty to use the emotional defaults, or set to: celebration, angry, happy, fish, grieving, fridge</p>
+    </p>
+    Using the specified tags, you should see the correct tags being applied per paragraph, e.g., "grieving" should tag the sentence with "funeral" in it.
+
+{% endblock %}
