@@ -18,6 +18,8 @@
     {% endfor %}
     </table>
 
+    <p>Similarities as a comma-separated list: {{ output_sim_per_paragraph_str }}</p>
+
     <h3>The best tags for the text as a whole were, from most to least strongly associated:</h3>
     {% for val in output_tag_with_sim_all %}
         <div>{{ val }}</div>

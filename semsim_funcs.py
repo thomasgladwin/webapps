@@ -20,10 +20,10 @@ def get_sims(target_words, pos_words, neg_words):
         pos_sims = []
         neg_sims = []
         for attribute_word in pos_words:
-            this_sim = word_vectors.similarity(target_word, attribute_word)
+            this_sim = np.dot(word_vectors[target_word], word_vectors[attribute_word]) # word_vectors.similarity(target_word, attribute_word)
             pos_sims.append(this_sim)
         for attribute_word in neg_words:
-            this_sim = word_vectors.similarity(target_word, attribute_word)
+            this_sim = np.dot(word_vectors[target_word], word_vectors[attribute_word]) # word_vectors.similarity(target_word, attribute_word)
             neg_sims.append(this_sim)
         if len(pos_sims) > 0:
             mean_pos = np.array(pos_sims).mean()

@@ -12,8 +12,8 @@ from nltk import pos_tag
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import nltk
-nltk.download('wordnet')
-nltk.download('averaged_perceptron_tagger')
+#nltk.download('wordnet')
+#nltk.download('averaged_perceptron_tagger')
 
 def read_words():
     words = []

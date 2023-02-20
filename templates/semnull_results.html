@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Semantic Null Distribution</h1>
+    <h2>Results</h2>
+    Number of simulated random words, within the template sentence constraints: {{ N_random_words_found }}.
+
+    <h3>P-values for specified similarity scores:</h3>
+    <table>
+        <tr><td>Score</td><td>p</td></tr>
+    {% for row in p_values_nested %}
+        <tr>
+        {% for val in row %}
+            <td>{{ val }}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+
+    <h3>Simulated null distribution of similarity scores:</h3>
+
+    <div>{{ null_distr_scores }}</div>
+
+    <p><a href="{{ url_for('semnull') }}">New inputs</a></p>
+
+{% endblock %}

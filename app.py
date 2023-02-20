@@ -5,6 +5,7 @@
 from flask import Flask, render_template, request
 import semsim_funcs
 import conttag_funcs
+import semnull_funcs
 
 app = Flask(__name__)
 
@@ -55,3 +56,21 @@ def conttag_results():
         this_row = [z[0], round(z[1], 3), z[2]]
         nested_info_per_paragraph.append(this_row)
     return render_template('conttag_results.html', nested_info_per_paragraph=nested_info_per_paragraph,output_tag_with_sim_per_paragraph=output_tag_with_sim_per_paragraph, output_tag_with_sim_all=output_tag_with_sim_all,tags_in_vocab_str=tags_in_vocab_str, text=text, output_all=output_all, output_sim_all=output_sim_all, output_per_paragraph_str=output_per_paragraph_str, output_sim_per_paragraph_str=output_sim_per_paragraph_str)
+
+@app.route('/semnull')
+def semnull():
+    return render_template('semnull.html')
+
+@app.route('/semnull_results', methods=['GET', 'POST'])
+def semnull_results():
+    target_word = request.form['target_word']
+    scores_to_test = request.form['scores_to_test']
+    template_sentence = request.form['template_sentence']
+    template_pos = request.form['template_pos']
+    null_distr_scores = semnull_funcs.get_semnull(target_word, template_sentence, template_pos)
+    N_random_words_found = len(null_distr_scores)
+    p_values, scores_to_test_output = semnull_funcs.get_p(scores_to_test, null_distr_scores)
+    p_values_nested = []
+    for z in zip(scores_to_test_output, p_values):
+        p_values_nested.append([z[0], z[1]])
+    return render_template('semnull_results.html', null_distr_scores=null_distr_scores, N_random_words_found=N_random_words_found, p_values_nested=p_values_nested)
