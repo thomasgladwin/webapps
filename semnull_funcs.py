@@ -26,7 +26,7 @@ def get_semnull(target_word, template_sentence, template_pos):
         return null_distr_scores
     random_word_index = template_words.index('$')
     n_random_desired = 500
-    max_iters_total = 10000
+    max_iters_total = 50000
     iIter = 0
     while iIter < max_iters_total and len(null_distr_scores) < n_random_desired:
         random_words = random.sample(word_vectors.index_to_key, 1)
@@ -38,6 +38,7 @@ def get_semnull(target_word, template_sentence, template_pos):
             #print(random_words[0])
             sim_random = np.dot(word_vectors[target_word], word_vectors[random_words[0]])
             null_distr_scores.append(sim_random)
+        iIter = iIter + 1
     return null_distr_scores
 
 #d = get_semnull("owl", "The animal is $", "JJ")
