@@ -16,13 +16,12 @@ import nltk
 #nltk.download('averaged_perceptron_tagger')
 import random
 
-def get_semnull(target_word, template_sentence, template_pos):
-    print(target_word)
-    print(template_sentence)
-    print(template_pos)
+def get_semnull(target_word, contrast_word, template_sentence, template_pos):
     null_distr_scores = []
     template_words = re.split(r'[ (),;.-]', template_sentence)
-    if '$' not in template_words:
+    if '$' not in template_words or target_word not in word_vectors.key_to_index:
+        return null_distr_scores
+    if len(contrast_word) > 0 and contrast_word not in word_vectors.key_to_index:
         return null_distr_scores
     random_word_index = template_words.index('$')
     n_random_desired = 500
@@ -34,9 +33,12 @@ def get_semnull(target_word, template_sentence, template_pos):
         random_sentence_words = random_sentence.split()
         pt_vec = pos_tag(random_sentence_words)
         pos_tag_random = pt_vec[random_word_index][1]
-        if pos_tag_random == template_pos:
+        if len(template_pos) == 0 or pos_tag_random == template_pos:
             #print(random_words[0])
             sim_random = np.dot(word_vectors[target_word], word_vectors[random_words[0]])
+            if len(contrast_word) > 0:
+                sim_contrast = np.dot(word_vectors[contrast_word], word_vectors[random_words[0]])
+                sim_random = sim_random - sim_contrast
             null_distr_scores.append(sim_random)
         iIter = iIter + 1
     return null_distr_scores

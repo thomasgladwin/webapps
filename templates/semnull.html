@@ -2,22 +2,28 @@
 
 {% block content %}
     <h1>Semantic Null Distribution</h1>
-    <p>This app calculates a null distribution of semantic similarity scores (using the dot product) with a target word, given a template sentence.
-    The template sentence requires a $ symbol to represent the word to be randomized.
+    <p>This app calculates a null distribution of semantic similarity scores (using the dot product) with a target word. If a contrast word is specified, the relative similarity scores are used.
+    <br>The null distribution is based on randomly selected words which fit within a template sentence. The template sentence uses a $ symbol to represent the word to be randomized.
     The template sentence also requires a part-of-speech tag (for the pos_tag function from the NLTK toolkit) that determines the grammatical form allowed for random words.
-    Examples of tags are: 'JJ' for adjectives, 'NN' for nouns, 'RB' for adverbs, 'VB' for verbs.</p>
+    Examples of tags are: 'JJ' for adjectives, 'NN' for nouns, 'RB' for adverbs, 'VB' for verbs.
+    <br>To pick words fully at random, use only a $ for the sentence and keep the part-of-speech tag empty.
+    <br>Scores can be entered for which to calculate p-values.
+    <br>If there is a problem with the input (e.g., an unrecognized word or tag), an empty distribution will be returned and any p-values will be set to 666.
+    </p>
     <p>Similar to tests for biophilic associations in language usage in <a href="https://www.liebertpub.com/doi/10.1089/eco.2022.0036">Gladwin, Markwell & Panno (2022)</a></p>
     <h2>Input</h2>
     <p>Please enter the target word.</p>
     <form action = "semnull_results" method="POST">
         Target word:  <input type="text" name="target_word">
+        <br>Contrast word:  <input type="text" name="contrast_word">
         <br>Comma-separated similarity scores for which to get p-values:  <input type="text" name="scores_to_test">
         <br>Template sentence, where $ represents the word to randomize: <input type="text" name="template_sentence">
         <br>Randomized words' part-of-speech tag: <input type="text" name="template_pos">
         <p><button>Submit</button></p>
     </form>
     <h2>Example</h2>
-    To test the significance of the semantic similarity score between "owl" and "wise", take "owl" as the target word.
-    <br>Then the null distribution is formed by replacing the word "wise" with randomly selected of words, and storing their similarity scores with "owl".
+    To test the significance of the semantic similarity score between "owl" and "wise", take "owl" as the target word. Random words will then replace "wise".
+    <br>The similarity between "owl" and "wise" can be calculated using ContTag. Relative similarity scores could be taken from SemSim.
+    <br>The null distribution is formed by replacing the word "wise" with randomly selected of words, and storing their similarity scores with "owl".
     <br>The template sentence could be "The animal is %", with part-of-speech tag "JJ", for adjectives.
 {% endblock %}

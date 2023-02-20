@@ -64,10 +64,11 @@ def semnull():
 @app.route('/semnull_results', methods=['GET', 'POST'])
 def semnull_results():
     target_word = request.form['target_word']
+    contrast_word = request.form['contrast_word']
     scores_to_test = request.form['scores_to_test']
     template_sentence = request.form['template_sentence']
     template_pos = request.form['template_pos']
-    null_distr_scores = semnull_funcs.get_semnull(target_word, template_sentence, template_pos)
+    null_distr_scores = semnull_funcs.get_semnull(target_word, contrast_word, template_sentence, template_pos)
     N_random_words_found = len(null_distr_scores)
     p_values, scores_to_test_output = semnull_funcs.get_p(scores_to_test, null_distr_scores)
     p_values_nested = []
