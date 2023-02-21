@@ -10,5 +10,7 @@ Currently:
   
   SemNull: Generates a null-hypothesis distribution and p-values for similarity scores, over random words with a given role in a template sentence.
 
+To re-use - make sure to uncomment the lines for NLTK downloads when first running.
+
 [![DOI](https://zenodo.org/badge/602762837.svg)](https://zenodo.org/badge/latestdoi/602762837)
 
