@@ -6,7 +6,7 @@ Currently:
 
   SemSim: Calculates the semantic similarity between target words and positive versus negative attribute word-lists.
   
-  EmoCont: Calculates the emotional context of text. Output includes the primary emotions per paragraph, which can be fed into SemSim for further analysis.
+  SemTag: Calculates the emotional context of text. Output includes the primary emotions per paragraph, which can be fed into SemSim for further analysis.
   
   SemNull: Generates a null-hypothesis distribution and p-values for similarity scores, over random words with a given role in a template sentence.
 
