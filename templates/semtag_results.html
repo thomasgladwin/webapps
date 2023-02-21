@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>SemTag</h1>
+    <h2>Results</h2>
+
+    <h3>The primary tags per paragraph were:</h3>
+    <div>{{ output_per_paragraph_str }}</div>
+
+    <h3>The similarity scores of the primary tags per paragraph were:</h3>
+    <table>
+    {% for this_row in nested_info_per_paragraph %}
+        <tr>
+            {% for val in this_row %}
+                <td>{{ val }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+
+    <p>Similarities as a comma-separated list: {{ output_sim_per_paragraph_str }}</p>
+
+    <h3>The best tags for the text as a whole were, from most to least strongly associated:</h3>
+    {% for val in output_tag_with_sim_all %}
+        <div>{{ val }}</div>
+    {% endfor %}
+
+    <p><a href="{{ url_for('semtag') }}">New text</a></p>
+
+    <h2>Input checks</h2></h2>
+
+    <h3>The tags known within the vocabulary were:</h3>
+    <div style="word-wrap: break-word;">{{ tags_in_vocab_str }}</div>
+
+    <h3>The text was:</h3>
+    {% for paragraph in text %}
+        <div>{{ paragraph }}</div>
+    {% endfor %}
+
+{% endblock %}

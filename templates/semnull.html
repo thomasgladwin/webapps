@@ -15,15 +15,15 @@
     <p>Please enter the target word.</p>
     <form action = "semnull_results" method="POST">
         Target word:  <input type="text" name="target_word">
-        <br>Contrast word:  <input type="text" name="contrast_word">
-        <br>Comma-separated similarity scores for which to get p-values:  <input type="text" name="scores_to_test">
-        <br>Template sentence, where $ represents the word to randomize: <input type="text" name="template_sentence">
-        <br>Randomized words' part-of-speech tag: <input type="text" name="template_pos">
+        <p>Contrast word:  <input type="text" name="contrast_word"></p>
+        <p>Comma-separated similarity scores for which to get p-values:  <input type="text" name="scores_to_test"></p>
+        <p>Template sentence, where $ represents the word to randomize: <input type="text" name="template_sentence"></p>
+        <p>Randomized words' part-of-speech tag: <input type="text" name="template_pos"></p>
         <p><button>Submit</button></p>
     </form>
     <h2>Example</h2>
     To test the significance of the semantic similarity score between "owl" and "wise", take "owl" as the target word. Random words will then replace "wise".
-    <br>The similarity between "owl" and "wise" can be calculated using ContTag. Relative similarity scores could be taken from SemSim.
+    <br>The similarity between "owl" and "wise" could be taken from SemSim or SemTag. Relative similarity scores could be taken from SemSim.
     <br>The null distribution is formed by replacing the word "wise" with randomly selected of words, and storing their similarity scores with "owl".
     <br>The template sentence could be "The animal is %", with part-of-speech tag "JJ", for adjectives.
 {% endblock %}
