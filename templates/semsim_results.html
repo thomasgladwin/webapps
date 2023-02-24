@@ -4,6 +4,11 @@
     <h1>Semantic Similarity</h1>
     <h2>Results</h2>
 
+    {% if error_message %}
+        <h2>Error</h2>
+        {{ error_message }}
+    {% endif %}
+
     <h3>Relative similarities per target word:</h3>
     {% for val in targets_with_sims %}
         <div>{{ val }}</div>
@@ -17,6 +22,8 @@
     {% for w in target_words %}
         <div>{{ w }}</div>
     {% endfor %}
+    <p>Contrast word:</p>
+    {{ contrast_word }}
     <p>Positive words:</p>
     {% for w in pos_words %}
         <div>{{ w }}</div>

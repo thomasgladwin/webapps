@@ -20,15 +20,16 @@ def semsim():
 @app.route('/semsim_results', methods=['GET', 'POST'])
 def semsim_results():
     target_words = ''.join(request.form['target_words'].lower().split()).split(',')
+    contrast_word = request.form['contrast_word']
     pos_words = ''.join(request.form['pos_words'].lower().split()).split(',')
     neg_words = ''.join(request.form['neg_words'].lower().split()).split(',')
-    relative_sims, target_words, pos_words, neg_words = semsim_funcs.get_sims(target_words, pos_words, neg_words)
+    relative_sims, target_words, pos_words, neg_words, error_message = semsim_funcs.get_sims(target_words, pos_words, neg_words, contrast_word=contrast_word)
     print(relative_sims)
     targets_with_sims = []
     for z in zip(target_words, relative_sims):
         this_str = ' '.join([z[0], str(round(z[1], 3))])
         targets_with_sims.append(this_str)
-    return render_template('semsim_results.html', targets_with_sims=targets_with_sims, target_words=target_words, pos_words=pos_words, neg_words=neg_words, relative_sims=relative_sims)
+    return render_template('semsim_results.html', error_message=error_message, targets_with_sims=targets_with_sims, target_words=target_words, pos_words=pos_words, neg_words=neg_words, relative_sims=relative_sims, contrast_word=contrast_word)
 
 @app.route('/semtag')
 def semtag():
@@ -63,15 +64,23 @@ def semnull():
 
 @app.route('/semnull_results', methods=['GET', 'POST'])
 def semnull_results():
-    target_word = request.form['target_word']
+    target_words = ''.join(request.form['target_words'].lower().split()).split(',')
     contrast_word = request.form['contrast_word']
+    pos_words = ''.join(request.form['pos_words'].lower().split()).split(',')
+    neg_words = ''.join(request.form['neg_words'].lower().split()).split(',')
     scores_to_test = request.form['scores_to_test']
     template_sentence = request.form['template_sentence']
     template_pos = request.form['template_pos']
-    null_distr_scores = semnull_funcs.get_semnull(target_word, contrast_word, template_sentence, template_pos)
+    print(target_words)
+    print(contrast_word)
+    null_distr_scores = semnull_funcs.get_semnull(pos_words, neg_words, template_sentence, template_pos)
     N_random_words_found = len(null_distr_scores)
-    p_values, scores_to_test_output = semnull_funcs.get_p(scores_to_test, null_distr_scores)
+    print(N_random_words_found)
+    p_values, target_words_scores, target_words_output, scores_to_test_output, error_message = semnull_funcs.get_p(target_words, pos_words, neg_words, scores_to_test, null_distr_scores, contrast_word=contrast_word)
     p_values_nested = []
-    for z in zip(scores_to_test_output, p_values):
-        p_values_nested.append([z[0], z[1]])
-    return render_template('semnull_results.html', null_distr_scores=null_distr_scores, N_random_words_found=N_random_words_found, p_values_nested=p_values_nested)
+    target_words_output.extend(scores_to_test_output)
+    print(p_values)
+    for z in zip(target_words_output, target_words_scores, p_values):
+        p_values_nested.append([z[0], round(z[1], 3), z[2]])
+    print(p_values_nested)
+    return render_template('semnull_results.html', error_message=error_message,null_distr_scores=null_distr_scores, N_random_words_found=N_random_words_found, p_values_nested=p_values_nested)

@@ -3,13 +3,15 @@
 {% block content %}
     <h1>Semantic Similarity</h1>
     <p>This app calculates a measure of semantic similarity (dot product of the word embeddings) between a target word and a list of "positive" attribute word versus a set of "negative" attribute words. Uses <a href="https://radimrehurek.com/gensim/models/word2vec.html">word2vec and the gensim package</a>.</p>
+    <p>A contrast word can be specified, in which case similarities are calculated with the target - contrast vector.</p>
     <p>This was used as part of the method in <a href="https://www.tandfonline.com/eprint/HQSV7KQY35BY53BHEW36/full?target=10.1080/16066359.2022.2123474">Gladwin (2022)</a>.</p>
     <h2>Input</h2>
     <p>Please enter the words as a comma-separated list.</p>
     <form action = "semsim_results" method="POST">
-        Target words:  <input type="text" name="target_words">
-        Positive words: <input type="text" name="pos_words">
-        Negative words: <input type="text" name="neg_words">
+        <p>Target words:  <input type="text" name="target_words" size="80"></p>
+        <p>Target-contrast word:  <input type="text" name="contrast_word" size="50"></p>
+        <p>Positive words: <input type="text" name="pos_words" size="80"></p>
+        <p>Negative words: <input type="text" name="neg_words" size="80"></p>
         <p><button>Submit</button></p>
     </form>
     <h2>Example</h2>

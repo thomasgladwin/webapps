@@ -2,27 +2,32 @@
 
 {% block content %}
     <h1>Semantic Null Distribution</h1>
-    <p>This app calculates a null distribution of semantic similarity scores (using the dot product) with a target word. If a contrast word is specified, the relative similarity scores are used.
+    <p>This app calculates a null distribution of semantic similarity scores (using the dot product) between a target word and positive versus negative sets of words.
     <br>The null distribution is based on randomly selected words which fit within a template sentence. The template sentence uses a $ symbol to represent the word to be randomized.
     The template sentence also requires a part-of-speech tag (for the pos_tag function from the NLTK toolkit) that determines the grammatical form allowed for random words.
     Examples of tags are: 'JJ' for adjectives, 'NN' for nouns, 'RB' for adverbs, 'VB' for verbs.
     <br>To pick words fully at random, use only a $ for the sentence and keep the part-of-speech tag empty.
-    <br>Scores can be entered for which to calculate p-values.
+    <br>Pre-calculated scores can also be entered for which to calculate p-values.
     <br>If there is a problem with the input (e.g., an unrecognized word or tag), an empty distribution will be returned and any p-values will be set to 666.
     </p>
     <p>Similar to tests for biophilic associations in language usage in <a href="https://www.liebertpub.com/doi/10.1089/eco.2022.0036">Gladwin, Markwell & Panno (2022)</a></p>
     <h2>Input</h2>
+    Enter sets of words separated by commas.
     <form action = "semnull_results" method="POST">
-        Target word:  <input type="text" name="target_word">
-        <p>Contrast word:  <input type="text" name="contrast_word"></p>
-        <p>Comma-separated similarity scores for which to get p-values:  <input type="text" name="scores_to_test"></p>
+        <p>Target word(s) to test:  <input type="text" name="target_words" size="80"></p>
+        <p>Target-contrast word:  <input type="text" name="contrast_word" size="50"></p>
+        <p>Positive word(s):  <input type="text" name="pos_words" size="80"></p>
+        <p>Negative word(s):  <input type="text" name="neg_words" size="80"></p>
+        <p>Pre-calculated similarity scores:  <input type="text" name="scores_to_test"></p>
         <p>Template sentence, where $ represents the word to randomize: <input type="text" name="template_sentence"></p>
         <p>Randomized words' part-of-speech tag: <input type="text" name="template_pos"></p>
         <p><button>Submit</button></p>
     </form>
     <h2>Example</h2>
-    To test the significance of the semantic similarity score between "owl" and "wise", take "owl" as the target word. Random words will then replace "wise".
-    <br>The similarity between "owl" and "wise" could be taken from SemSim or SemTag. Relative similarity scores could be taken from SemSim.
-    <br>The null distribution is formed by replacing the word "wise" with randomly selected of words, and storing their similarity scores with "owl".
-    <br>The template sentence could be "The animal is %", with part-of-speech tag "JJ", for adjectives.
+    To test whether the drinks beer, coffee, and wine are related to drunkenness versus alertness in the model, take "beer,coffee,wine" as the target words, "hungover, tired, drunk" as the positive words, and "awake, alert" as the negative words.
+    <br>Random words will then have their similarities calculated with the positive and negative sets (note that "positive" and "negative" don't refer to valence here).
+    <br>The null distribution consists of the relative semantic similarity scores of the randomly selected words.
+    <br>The template sentence could be "I am $", with part-of-speech tag "JJ", for adjectives.
+    <br>A target-contrast word can be specified to test whether a target's similarity remains significant when the contrast word's vector is subtracted from it.
+    <br>The output will give the randomization-based p-values for the input target words and scores (recall that small p-values indicate statistical significance, traditionally below .05).
 {% endblock %}
