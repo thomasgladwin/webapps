@@ -2,9 +2,8 @@
 
 {% block content %}
     <h1>Semantic Similarity</h1>
-    <p>This app calculates a measure of semantic similarity (dot product of the word embeddings) between a target word and a list of "positive" attribute word versus a set of "negative" attribute words.
-        Based on <a href="https://radimrehurek.com/gensim/models/word2vec.html">word2vec and the gensim package</a>. This kind of method was used in <a href="https://www.tandfonline.com/eprint/HQSV7KQY35BY53BHEW36/full?target=10.1080/16066359.2022.2123474">Gladwin (2022)</a> (for further reading, see references).
-    </p>
+    <p>This app calculates a measure of semantic similarity (dot product of the word embeddings) between a target word and a list of "positive" attribute word versus a set of "negative" attribute words. Uses <a href="https://radimrehurek.com/gensim/models/word2vec.html">word2vec and the gensim package</a>.</p>
+    <p>This was used as part of the method in <a href="https://www.tandfonline.com/eprint/HQSV7KQY35BY53BHEW36/full?target=10.1080/16066359.2022.2123474">Gladwin (2022)</a>.</p>
     <h2>Input</h2>
     <p>Please enter the words as a comma-separated list.</p>
     <form action = "semsim_results" method="POST">

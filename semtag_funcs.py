@@ -52,11 +52,6 @@ def get_semtags_inner(text, emowords, WVM):
         neg_v = [np.dot(word_vectors['not'] - word_vectors['very'], word_vectors[token]) for token in tokens]
         neg_v = np.array(neg_v)
         nonnegation = 1 - 2 * np.mod(len(neg_v[neg_v > 1]), 2)
-        # Get nouns and adjectives after preprocessing
-        pt = pos_tag(tokens)
-        tokens2 = [x[0] for x in pt if x[1] in ['JJ', 'NN', 'RB', 'VB']]
-        if False and len(tokens2) > 0:
-            tokens = tokens2
         #print(tokens)
         # Find similarities with the emotion words
         token_sims = []

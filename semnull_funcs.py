@@ -33,6 +33,8 @@ def get_semnull(target_word, contrast_word, template_sentence, template_pos):
         random_sentence_words = random_sentence.split()
         pt_vec = pos_tag(random_sentence_words)
         pos_tag_random = pt_vec[random_word_index][1]
+        if len(pos_tag_random) > len(template_pos):
+            pos_tag_random = pos_tag_random[0:len(template_pos)]
         if len(template_pos) == 0 or pos_tag_random == template_pos:
             #print(random_words[0])
             sim_random = np.dot(word_vectors[target_word], word_vectors[random_words[0]])
