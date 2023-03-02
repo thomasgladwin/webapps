@@ -4,7 +4,7 @@
     <h1>Semantic Similarity</h1>
     <p>This app calculates a measure of semantic similarity (dot product of the word embeddings) between a target word and a list of "positive" attribute word versus a set of "negative" attribute words. Uses <a href="https://radimrehurek.com/gensim/models/word2vec.html">word2vec and the gensim package</a>.</p>
     <p>A contrast word can be specified, in which case similarities are calculated with the target - contrast vector.</p>
-    <p>This was used as part of the method in <a href="https://www.tandfonline.com/eprint/HQSV7KQY35BY53BHEW36/full?target=10.1080/16066359.2022.2123474">Gladwin (2022)</a>.</p>
+    <p>This was used as part of the method in <a href="https://www.tandfonline.com/eprint/HQSV7KQY35BY53BHEW36/full?target=10.1080/16066359.2022.2123474">Gladwin (2022)</a>. One of the ideas for future research was to use measures like this to select target words that, hypothetically, either (1) have a strong model-based (i.e., common, population-level) association with one versus the other attribute category to get strong within-subject effects or (2) actually have a weak relative association to allow for more individual variability and hence higher reliability.</p>
     <h2>Input</h2>
     <p>Please enter the words as a comma-separated list.</p>
     <form action = "semsim_results" method="POST">

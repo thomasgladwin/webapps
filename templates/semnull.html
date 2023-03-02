@@ -4,7 +4,7 @@
     <h1>Semantic Null Distribution</h1>
     <p>This app calculates a null distribution of semantic similarity scores (using the dot product) between a target word and positive versus negative sets of words.
     <br>The null distribution is based on randomly selected words which fit within a template sentence. The template sentence uses a $ symbol to represent the word to be randomized.
-    The template sentence also requires a part-of-speech tag (for the pos_tag function from the NLTK toolkit) that determines the grammatical form allowed for random words.
+    The template sentence also requires a part-of-speech tag (for the pos_tag function from the NLTK toolkit, using the Penn Treebank tagset) that determines the grammatical form allowed for random words.
     Examples of tags are: 'JJ' for adjectives, 'NN' for nouns, 'RB' for adverbs, 'VB' for verbs.
     <br>To pick words fully at random, use only a $ for the sentence and keep the part-of-speech tag empty.
     <br>Pre-calculated scores can also be entered for which to calculate p-values.
