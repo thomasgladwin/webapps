@@ -96,11 +96,19 @@ def textCoder_results():
     print(text)
     knowledge_list = textCoder_funcs.get_textCoder(text)
     topics_str = ','.join([k[0] for k in knowledge_list])
-    attributes_str = ','.join([a[0] for k in knowledge_list for a in k[1]])
+    attributes_str = ', '.join([a[0] for k in knowledge_list for a in k[1]])
     text_in_paragraphs = text.split("\n")
     nested_info_per_paragraph = []
+    nested_info_per_paragraph_count = []
+    nested_info_per_paragraph_parindex = []
     topics_str_list = [k[0] for k in knowledge_list]
-    attr_str_list = [','.join([a[0] + "(" + str(a[1]) + ")" for a in k[1]]) for k in knowledge_list]
+    attr_str_list = [', '.join([a[0] for a in k[1]]) for k in knowledge_list]
     for z in zip(topics_str_list, attr_str_list):
         nested_info_per_paragraph.append([z[0], z[1]])
-    return render_template('textCoder_results.html', topics_str=topics_str, attributes_str=attributes_str, nested_info_per_paragraph=nested_info_per_paragraph, text_in_paragraphs=text_in_paragraphs)
+    attr_str_count_list = [', '.join([a[0] + " (" + str(a[1]) + ")" for a in k[1]]) for k in knowledge_list]
+    for z in zip(topics_str_list, attr_str_count_list):
+        nested_info_per_paragraph_count.append([z[0], z[1]])
+    attr_str_parindex_list = [', '.join([a[0] + " (" + str(a[2]) + ")" for a in k[1]]) for k in knowledge_list]
+    for z in zip(topics_str_list, attr_str_parindex_list):
+        nested_info_per_paragraph_parindex.append([z[0], z[1]])
+    return render_template('textCoder_results.html', topics_str=topics_str, attributes_str=attributes_str, nested_info_per_paragraph=nested_info_per_paragraph, text_in_paragraphs=text_in_paragraphs,nested_info_per_paragraph_count=nested_info_per_paragraph_count,nested_info_per_paragraph_parindex=nested_info_per_paragraph_parindex)

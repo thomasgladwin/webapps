@@ -10,9 +10,31 @@
     <h3>The attributes were:</h3>
     <div>{{ attributes_str }}</div>
 
-    <h3>The topics and attributes associated with them were (numbers are counts of how many paragraphs contained the association at least once):</h3>
+    <h3>The topics and attributes associated with them were, ordered by counts:</h3>
     <table>
     {% for this_row in nested_info_per_paragraph %}
+        <tr>
+            {% for val in this_row %}
+                <td>{{ val }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+
+    <h3>The topics and attributes associated with them, with counts in brackets (numbers are counts of how many paragraphs contained the association at least once):</h3>
+    <table>
+    {% for this_row in nested_info_per_paragraph_count %}
+        <tr>
+            {% for val in this_row %}
+                <td>{{ val }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+
+    <h3>The topics and attributes associated with them, with paragraph indices for occurrences:</h3>
+    <table>
+    {% for this_row in nested_info_per_paragraph_parindex %}
         <tr>
             {% for val in this_row %}
                 <td>{{ val }}</td>
