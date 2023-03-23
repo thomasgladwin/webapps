@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Text Coder</h1>
+    <p>This app attempts extract basic information from text inputs. Topics and their attributes are extracted. The number of times an attribute is found for a given topic is counted, once per paragraph.</p>
+    <h2>Input</h2>
+    <form action = "textCoder_results" method="POST">
+        <label>Text to analyze:</label>
+        <br><textarea rows=15 cols=80 name="text"></textarea>
+        <p><button>Submit</button></p>
+    </form>
+
+    <h2>Example</h2>
+    An example to check whether the expected topic-attribute relationships are returned:
+    <p>Text to analyze:
+    <p>I like dogs, but I don't like cats.
+    <br>Dogs are great. Thomas eats fish and is smelly. Jim is suspicious.
+    <br>Cats are evil. Thomas is smelly and quick.
+    <br>I like hats. Hats are the best. Cats are definitely evil.
+    <br>I feel cats are evil and Thomas is smelly.
+    <br>The evil of cats astounds me, but dogs are great.
+    </p>
+    <p>This should return lists of topics, attributes and their associations that reflect the gist of the statements.</p>
+
+{% endblock %}

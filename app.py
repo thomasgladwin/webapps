@@ -6,6 +6,7 @@ from flask import Flask, render_template, request
 import semsim_funcs
 import semtag_funcs
 import semnull_funcs
+import textCoder_funcs
 
 app = Flask(__name__)
 
@@ -84,3 +85,22 @@ def semnull_results():
         p_values_nested.append([z[0], round(z[1], 3), z[2]])
     print(p_values_nested)
     return render_template('semnull_results.html', error_message=error_message,null_distr_scores=null_distr_scores, N_random_words_found=N_random_words_found, p_values_nested=p_values_nested)
+
+@app.route('/textCoder')
+def textCoder():
+    return render_template('textCoder.html')
+
+@app.route('/textCoder_results', methods=['GET', 'POST'])
+def textCoder_results():
+    text = request.form['text']
+    print(text)
+    knowledge_list = textCoder_funcs.get_textCoder(text)
+    topics_str = ','.join([k[0] for k in knowledge_list])
+    attributes_str = ','.join([a[0] for k in knowledge_list for a in k[1]])
+    text_in_paragraphs = text.split("\n")
+    nested_info_per_paragraph = []
+    topics_str_list = [k[0] for k in knowledge_list]
+    attr_str_list = [','.join([a[0] + "(" + str(a[1]) + ")" for a in k[1]]) for k in knowledge_list]
+    for z in zip(topics_str_list, attr_str_list):
+        nested_info_per_paragraph.append([z[0], z[1]])
+    return render_template('textCoder_results.html', topics_str=topics_str, attributes_str=attributes_str, nested_info_per_paragraph=nested_info_per_paragraph, text_in_paragraphs=text_in_paragraphs)
