@@ -10,6 +10,8 @@ Currently:
   
   SemNull: Generates a null-hypothesis distribution and p-values for similarity scores, over random words with a given role in a template sentence.
   
+  SemCluster: Finds clusters of words with simlar meanings (a kind of automated affinity mapping).
+  
   textCoder: Very simple text analyzer. It tries to extract topics and attributes assigned to the topics, with counts of how many times a topic-attribute association occurred, at most once per paragraph.
 
 To re-use - make sure to uncomment the lines for NLTK downloads when first running.
