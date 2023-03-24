@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Semantic Clusters</h1>
+    <p>This function identifies semantic dimensions and clusters of similar words.</p>
+    <h2>Input</h2>
+    <p>Please enter the words as a comma-separated list.</p>
+    <form action = "semcluster_results" method="POST">
+        <p>Target words:  <input type="text" name="words" size="80"></p>
+        <p><button>Submit</button></p>
+    </form>
+    <h2>Example</h2>
+    <p>Input the word list: dog,cat,hamster,rabbit,skyscraper,house,building,bungalow,angry,happy,sad,furious,joyful.</p>
+    <p>You should see the obvious clusters in the results.</p>
+
+{% endblock %}

@@ -6,6 +6,7 @@ from flask import Flask, render_template, request
 import semsim_funcs
 import semtag_funcs
 import semnull_funcs
+import semcluster_funcs
 import textCoder_funcs
 
 app = Flask(__name__)
@@ -112,3 +113,16 @@ def textCoder_results():
     for z in zip(topics_str_list, attr_str_parindex_list):
         nested_info_per_paragraph_parindex.append([z[0], z[1]])
     return render_template('textCoder_results.html', topics_str=topics_str, attributes_str=attributes_str, nested_info_per_paragraph=nested_info_per_paragraph, text_in_paragraphs=text_in_paragraphs,nested_info_per_paragraph_count=nested_info_per_paragraph_count,nested_info_per_paragraph_parindex=nested_info_per_paragraph_parindex)
+
+@app.route('/semcluster')
+def semcluster():
+    return render_template('semcluster.html')
+
+@app.route('/semcluster_results', methods=['GET', 'POST'])
+def semcluster_results():
+    words = request.form['words']
+    cluster_labels, cluster_items = semcluster_funcs.get_clusters(words)
+    cluster_info = []
+    for z in zip(cluster_labels, cluster_items):
+        cluster_info.append(['Cluster label: ' + z[0], 'Items: ' + ', '.join(z[1])])
+    return render_template('semcluster_results.html', words=words, cluster_info=cluster_info)

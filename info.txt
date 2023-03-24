@@ -3,3 +3,11 @@ python3 -m venv venv
 source venv/bin/activate
 
 pip3 install nltk
+
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+python3 -m spacy download en_core_web_sm
+
+python --version
+pip list
+

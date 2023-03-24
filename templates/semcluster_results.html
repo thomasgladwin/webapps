@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Semantic Clusters</h1>
+    <h2>Results</h2>
+
+    <h3>Clusters:</h3>
+    <ol>
+    {% for cluster in cluster_info %}
+        <p>
+        {% for val in cluster %}
+            <div>{{ val }}</div>
+        {% endfor %}
+        </p>
+    {% endfor %}
+    </ol>
+
+    <p><a href="{{ url_for('semcluster') }}">New inputs</a></p>
+
+    <h2>Input checks</h2>
+    <p>Words: {{ words }} </p>
+
+{% endblock %}
