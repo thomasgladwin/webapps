@@ -13,7 +13,7 @@ wv_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wvsubset
 word_vectors = KeyedVectors.load(wv_filepath, mmap='r')
 
 def find_split(w):
-    KL = KneeLocator(range(1, len(w)+1), w, curve="convex", direction="decreasing")
+    KL = KneeLocator(range(0, len(w)), w, curve="convex", direction="decreasing")
     ind_split = KL.elbow
     print(ind_split)
     return ind_split
@@ -24,7 +24,9 @@ def run_PCA(WVM):
     w, v = np.linalg.eig(C)
     w = np.array(np.real(w))
     v = np.matrix(np.real(v))
-    ind_split = np.max([min(2,WVM.shape[1]), find_split(w)])
+    ind_split = 1 + np.argwhere(w > np.mean(w))[0][0]
+    #ind_split = find_split(w)
+    print('PCA: ', ind_split)
     w = w[0:ind_split]
     v = v[:, 0:ind_split]
     L = WVM @ v
@@ -49,7 +51,10 @@ def get_clusters_inner(L, words, WVM):
         kmeans = KMeans(n_clusters=k, random_state=0, n_init="auto").fit(np.asarray(L))
         this_err = kmeans.inertia_
         err_v.append(this_err)
-    best_k = find_split(err_v)
+    best_k = find_split(err_v) + 1
+    print(best_k)
+    best_k = np.max([2, best_k])
+    print(best_k)
     kmeans = KMeans(n_clusters=best_k, random_state=0, n_init="auto").fit(np.asarray(L))
     labels = kmeans.labels_
     cluster_labels = []
@@ -76,6 +81,6 @@ def get_clusters(words):
     cluster_labels, cluster_items = get_clusters_inner(L, words, WVM)
     return cluster_labels, cluster_items
 
-# words='dog,cat,hamster,rabbit,skyscraper,house,building,bungalow,angry,happy,sad,furious,joyful.'
+words='dog,cat,pet,rabbit,skyscraper,house,building,bungalow,angry,happy,sad,depressed,calm.'
 #words='happy,joyful,glad,gleeful,sad,down,depressed,dejected,unhappy'
 #get_clusters(words)
