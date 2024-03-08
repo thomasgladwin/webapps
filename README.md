@@ -1,6 +1,6 @@
 # webapps
 
-Repository for Flask apps running on apps.tegladwin.com (hosted on Dreamhost). The idea was to turn some research software into more accessible web apps.
+Repository for Flask apps running online, linked here [apps.tegladwin.com](https://www.tegladwin.com/apps.php) (hosted on Heroku). The idea was to turn some research software into more accessible web apps.
 
 Currently:
 
